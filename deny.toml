@@ -1,0 +1,15 @@
+# deny.toml
+# Last refresh: 2026-09-21
+
+
+[bans]
+
+[bans.workspace-dependencies]
+
+[bans.std-replacements]
+
+[licenses]
+version = 2
+
+[advisories]
+ignore = []

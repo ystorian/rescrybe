@@ -1,0 +1,43 @@
+# Cargo.toml
+
+[package]
+name = "rescrybe"
+version = "0.0.1"
+edition = "2024"
+description = "Re-OCR scanned PDF files on macOS"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/ystorian/rescrybe"
+readme = "README.md"
+categories = ["text-processing", "command-line-utilities", "multimedia::images"]
+keywords = ["pdf", "ocr", "scan"]
+publish = true
+include = ["src/**/*.rs", "Cargo.toml", "Cargo.lock", "README.md", "/*.svg", "LICENSE*"]
+
+
+[package.metadata.binstall.signing]
+algorithm = "minisign"
+pubkey = "<to be filled later>"
+
+[dependencies]
+
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+strip = true
+debug = "none"
+panic = "abort"
+
+
+# Profile for GitHub action, used by `.github/workflows/ci-rust.yaml`
+[profile.ci]
+inherits = "dev"
+debug = false
+incremental = false
+opt-level = 0
+
+[profile.ci.package."*"]
+debug = false
+incremental = false
+opt-level = 0
