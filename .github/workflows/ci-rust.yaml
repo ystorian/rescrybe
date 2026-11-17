@@ -24,7 +24,7 @@ jobs:
 
   changes:
     name: Workflows
-    uses: ystorian/workflows/.github/workflows/detect_changes.yaml@b88fa97a730de0499415ad186fa0ecc5d21a5829 # v1.9.0
+    uses: ystorian/workflows/.github/workflows/detect_changes.yaml@e8851358670fbdc073675919957d35d8a766ad96 # v1.9.1
     permissions:
       contents: read
     with:
@@ -35,7 +35,7 @@ jobs:
     name: Workflows
     needs: changes
     if: needs.changes.outputs.run == 'true'
-    uses: ystorian/workflows/.github/workflows/check.yaml@b88fa97a730de0499415ad186fa0ecc5d21a5829 # v1.9.0
+    uses: ystorian/workflows/.github/workflows/check.yaml@e8851358670fbdc073675919957d35d8a766ad96 # v1.9.1
     permissions:
       actions: write # Required to cancel the `test` jobs on failure.
       contents: read
@@ -48,21 +48,22 @@ jobs:
     name: Workflows
     needs: changes
     if: needs.changes.outputs.run == 'true'
-    uses: ystorian/workflows/.github/workflows/test_rust.yaml@b88fa97a730de0499415ad186fa0ecc5d21a5829 # v1.9.0
+    uses: ystorian/workflows/.github/workflows/test_rust.yaml@e8851358670fbdc073675919957d35d8a766ad96 # v1.9.1
     permissions:
       contents: read
     with:
       runners: '["macos-26"]'
       rust_version: "1.100"
       timeout: 5
-      strict: true
+      clippy_os: '["macOS"]'
+      clippy_strict: true
 
 
   cargo-cache-cleanup:
     name: Workflows
     needs: test
     if: github.ref == 'refs/heads/main'
-    uses: ystorian/workflows/.github/workflows/cargo_cache_cleanup.yaml@b88fa97a730de0499415ad186fa0ecc5d21a5829 # v1.9.0
+    uses: ystorian/workflows/.github/workflows/cargo_cache_cleanup.yaml@e8851358670fbdc073675919957d35d8a766ad96 # v1.9.1
     permissions:
       actions: write # Required to list and delete the cache entries.
 
@@ -72,6 +73,6 @@ jobs:
     name: Workflows
     needs: [changes, check, test]
     if: always()
-    uses: ystorian/workflows/.github/workflows/status_check.yaml@b88fa97a730de0499415ad186fa0ecc5d21a5829 # v1.9.0
+    uses: ystorian/workflows/.github/workflows/status_check.yaml@e8851358670fbdc073675919957d35d8a766ad96 # v1.9.1
     with:
       needs: ${{ toJSON(needs) }}
