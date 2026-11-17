@@ -52,7 +52,7 @@ jobs:
     permissions:
       contents: read
     with:
-      runners: '["ubuntu-26.04-arm", "windows-11-arm", "macos-26"]'
+      runners: '["macos-26"]'
       rust_version: "1.100"
       timeout: 5
       strict: true
