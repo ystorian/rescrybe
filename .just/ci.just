@@ -23,7 +23,7 @@ ci:
 	just audit_actions --fast
 
 	# Test.
-	just test ci
-	just clippy ci
+	just test
+	just clippy --strict
 
 	echo {{ done('') }}
