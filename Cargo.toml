@@ -5,7 +5,7 @@ name = "rescrybe"
 version = "0.0.1"
 edition = "2024"
 description = "Re-OCR scanned PDF files on macOS"
-license = "MIT OR Apache-2.0"
+license = "AGPL-3.0-only"
 repository = "https://github.com/ystorian/rescrybe"
 readme = "README.md"
 categories = ["text-processing", "command-line-utilities", "multimedia::images"]
@@ -41,3 +41,7 @@ opt-level = 0
 debug = false
 incremental = false
 opt-level = 0
+
+[workspace.metadata.typos.files]
+ignore-hidden = false
+extend-exclude = [".git/**", "target/**"]
